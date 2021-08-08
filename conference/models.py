@@ -19,13 +19,14 @@ class Conference(models.Model):
     venue = models.CharField(max_length=255)
     country = models.CharField(max_length=100)
     est_submissions = models.IntegerField()
-    first_day = models.DateTimeField(auto_now_add=True, null=True)
-    last_day = models.DateTimeField(auto_now_add=True, null=True)
+    first_day = models.DateTimeField(auto_now_add=False, null=True)
+    last_day = models.DateTimeField(auto_now_add=False, null=True)
     primary_area = models.CharField(max_length=255)
     secondary_area = models.CharField(max_length=250, null=True)
     area_notes = models.CharField(max_length=255)
     organizer = models.CharField(max_length=100)
     organizer_webpage = models.URLField(max_length=200)
+    #pub_date = models.DateTimeField(auto_now_add=True)
 
     
     def __str__(self):

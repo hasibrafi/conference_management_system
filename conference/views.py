@@ -52,7 +52,7 @@ def conferenceList(request):
 
         conference.save()
 
-        latest_conferences = Conference.objects.order_by('-first_day')[:50]
+        latest_conferences = Conference.objects.order_by('-first_day')[:25]
         context = {'conference': conference, 'latest_conferences': latest_conferences}
 
     return render(request, 'conference/conference_list.html', context)
@@ -62,3 +62,13 @@ def conferenceDetails(request, id):
     context = {'conference': conference}
 
     return render(request, 'conference/conference_details.html', context)
+
+def viewConferences(request):
+    #conference = Conference.objects.get()
+    latest_conferences = Conference.objects.order_by('-first_day')[:25]
+    context = {'conference': conference, 'latest_conferences': latest_conferences}
+
+    return render(request, 'conference/view_conference_list.html', context)
+
+
+

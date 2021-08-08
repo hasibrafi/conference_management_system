@@ -6,4 +6,6 @@ urlpatterns = [
     path('create_conference', views.createConference, name='create_conference'),
     path('conference_list', views.conferenceList, name='conference_list'),
     path('conference_details/<str:id>', views.conferenceDetails, name='conference_details'),
+
+    path('view_conferences', views.viewConferences, name='view_conferences'),
 ]
