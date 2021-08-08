@@ -8,4 +8,5 @@ urlpatterns = [
     path('conference_details/<str:id>', views.conferenceDetails, name='conference_details'),
 
     path('view_conferences', views.viewConferences, name='view_conferences'),
+    path('upload_abstract', views.uploadAbstract, name='upload_abstract'),
 ]

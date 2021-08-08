@@ -1,4 +1,3 @@
-import conference
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
@@ -64,11 +63,16 @@ def conferenceDetails(request, id):
     return render(request, 'conference/conference_details.html', context)
 
 def viewConferences(request):
-    #conference = Conference.objects.get()
     latest_conferences = Conference.objects.order_by('-first_day')[:25]
-    context = {'conference': conference, 'latest_conferences': latest_conferences}
+    context = {'latest_conferences': latest_conferences}
 
     return render(request, 'conference/view_conference_list.html', context)
+
+def uploadAbstract(request):
+    
+    context = {}
+    
+    return render(request, 'conference/upload_abstract.html', context)
 
 
 

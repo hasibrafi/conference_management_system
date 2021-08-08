@@ -1,4 +1,3 @@
-import conference
 from django.contrib import admin
 from django.db import models 
 
@@ -26,8 +25,6 @@ class Conference(models.Model):
     area_notes = models.CharField(max_length=255)
     organizer = models.CharField(max_length=100)
     organizer_webpage = models.URLField(max_length=200)
-    #pub_date = models.DateTimeField(auto_now_add=True)
-
     
     def __str__(self):
         return self.title
