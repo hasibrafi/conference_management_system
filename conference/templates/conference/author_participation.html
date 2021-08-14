@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participate</title>
+</head>
+<body>
+    Participation form here ...
+    <div>
+        <ul>
+            <b>
+                <li>Type: {{conference.type}}</li>
+                <li>ID#{{conference.id}}</li>
+                <li>Title: {{conference.title}}</li>
+                <li>Location: {{conference.city}}, {{conference.country}}</li>
+            </b>
+        </ul>
+    </div>
+    <div>
+        <fieldset>
+            <form action="{% url 'abstract_list' conference.id %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token  %}
+                <div>
+                    <label for="">Author name: *</label>
+                    <input type="text" name="author_name"  required><br>
+                    <label for="">Research title: *</label>
+                    <input type="text" name="research_title"  required><br>
+                    <label for="">Upload abstract: *</label>
+                    <input type="file" name="abstract_file" accept=".pdf" required><br>
+                    <input type="submit">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+</body>
+</html>

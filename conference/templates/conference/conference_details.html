@@ -24,7 +24,7 @@
         <p><b>Area notes: </b>{{conference.area_notes}}</p>
         <p><b>Organizer: </b>{{conference.organizer}}</p>
         <p><b>Organizer's website: </b>{{conference.organizer_webpage}}</p>
-        
+        <a href="{% url 'upload_abstract' conference.id %}"><p>Participate here</p></a>
     </fieldset>
 
 </body>

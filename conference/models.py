@@ -1,3 +1,5 @@
+from django.db.models.deletion import CASCADE
+import conference
 from django.contrib import admin
 from django.db import models 
 
@@ -28,3 +30,12 @@ class Conference(models.Model):
     
     def __str__(self):
         return self.title
+
+class AbstractPaper(models.Model):
+    conference = models.ForeignKey(Conference, null=True, on_delete=CASCADE)
+    author_name = models.CharField(max_length=100)
+    paper_title = models.CharField(max_length=255)
+    abstract_file = models.FileField(upload_to='uploads/')
+
+    def __str__(self):
+        return self.paper_title

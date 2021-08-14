@@ -1,7 +1,9 @@
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
-from .models import Conference
+from .models import AbstractPaper, Conference
 
 # Create your views here.
 
@@ -68,11 +70,33 @@ def viewConferences(request):
 
     return render(request, 'conference/view_conference_list.html', context)
 
-def uploadAbstract(request):
-    
-    context = {}
-    
-    return render(request, 'conference/upload_abstract.html', context)
+def uploadAbstract(request, id):
+
+    conference = get_object_or_404(Conference, id=id)
+    context = {'conference': conference}
+
+    return render(request, 'conference/author_participation.html', context)
+
+def abstractList(request, id):
+    conference = get_object_or_404(Conference, id=id)
+
+    if request.method == 'POST':
+        name = request.POST['author_name']
+        title = request.POST['research_title'] 
+        #abstract_file = request.POST['abstract_file']
+        uploaded_file = request.FILES['abstract_file']
+        print(uploaded_file.name, uploaded_file.size)
+        fs = FileSystemStorage()
+        file_name = fs.save(uploaded_file.name, uploaded_file)
+        url = fs.url(file_name)
+        
+        abstract_paper = AbstractPaper(author_name=name, paper_title=title, abstract_file=uploaded_file)
+        abstract_paper.save()
+
+        context = {'conference': conference, 'abstract_paper': abstract_paper, 
+                   'uploaded_file': uploaded_file, 'file_name': file_name, 'url': url }
+
+    return render(request, 'conference/abstract_list.html', context)
 
 
 
