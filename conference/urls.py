@@ -5,6 +5,15 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+
+    path('service/', views.Services, name='service'),
+    path('about_us/', views.AboutUs, name='about_us'),
+    path('vcs/', views.VCS, name='vcs'),
+    
+
+
+
+    path('conference/', views.ConferenceModule, name='conference'),
     path('create_conference', views.createConference, name='create_conference'),
     path('conference_list', views.conferenceList, name='conference_list'),
     path('conference_details/<str:id>', views.conferenceDetails, name='conference_details'),
@@ -12,7 +21,15 @@ urlpatterns = [
     path('view_conferences', views.viewConferences, name='view_conferences'),
     path('upload_abstract/<str:id>', views.uploadAbstract, name='upload_abstract'),
 
-    path('abstract_list/<str:id>', views.abstractList, name='abstract_list'),   
+    path('abstract_list/<str:id>', views.abstractList, name='abstract_list'), 
+    path('abstract_paper_list/<str:id>', views.abstractpaperList, name='abstract_paper_list'), 
+
+    path('epic_series/', views.epicSeries, name='epic_series'), 
+    path('kalpa_publications/', views.kalpaPublications, name='kalpa_publications'), 
+    path('preprints/', views.Preprint, name='preprints'), 
+    path('author/', views.Author, name='author'), 
+    path('editor/', views.Editor, name='editor'),  
+
 
 ] 
 if settings.DEBUG:

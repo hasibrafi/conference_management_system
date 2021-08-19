@@ -7,8 +7,20 @@
     <title>Conference details</title>
 </head>
 <body>
+    <!-- <div>
+        <h3>EasyChair</h3>
+        <a href="{% url 'index' %}">Home</a>|
+        <a href="{% url 'epic_series' %}">EPiC Series</a> |
+        <a href="{% url 'kalpa_publications' %}">Kalpa Publication</a> |
+        <a href="{% url 'preprints' %}">Preprints</a> |
+        <a href="{% url 'author' %}">Author</a> |
+        <a href="{% url 'editor' %}">Editor</a>
+    </div> -->
     <fieldset>
-        <p><u> Conference ID#{{conference.id}}</u></p>
+        <p>
+            <u>Conference ID#{{conference.id}}</u>
+            <a href="{% url 'abstract_paper_list' conference.id %}"><p>See submitted abstracts here</p></a>
+        </p>
         <p><b>Title: </b>{{conference.title}}</p>
         <p><b>Acronym: </b>{{conference.acronym}}</p>
         

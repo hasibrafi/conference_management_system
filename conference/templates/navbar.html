@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+</head>
+<body>
+    {% block content %}
+
+    <div>
+        <h3>EasyChair</h3>
+        <a href="{% url 'service' %}">Services</a>|
+        <a href="{% url 'about_us' %}">About Us</a> |
+        <a href="{% url 'vcs' %}">Virtual conference System</a> |
+        <a href="{% url 'conference' %}">Conference</a> |
+        <a href="{% url 'author' %}">Author</a> |
+        <a href="{% url 'editor' %}">Editor</a>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

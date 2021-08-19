@@ -1,3 +1,4 @@
+import conference
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
@@ -9,18 +10,38 @@ from .models import AbstractPaper, Conference
 
 def index(request):
     context = {
-        'name':'Rafi',
-        'university': 'American International University Bangladesh',
-        'age' : 26,
-        'city': 'Dhaka',
-        'country': 'Bangladesh',
-        'passion':'Data Science',
+        'name': 'Rafi',
     }
     return render(request, 'index.html', context)
 
+
+def Services(request):
+    context = {}
+    return render(request, 'services/services.html', context)
+
+def AboutUs(request):
+    context = {}
+    return render(request, 'about/about_us.html', context)
+
+def VCS(request):
+    context = {}
+    return render(request, 'vcs/vcs.html', context)
+
+def ConferenceModule(request):
+    context = {
+        'name': 'Rafi',
+    }
+    return render(request, 'conference/conference.html', context)
+
+
+
 def createConference(request):
     message = 'This is the conference creation page.'
+    
+
     return render(request, 'conference/create_conference.html', context={'message': message})
+
+
 
 
 def conferenceList(request):
@@ -56,7 +77,7 @@ def conferenceList(request):
         latest_conferences = Conference.objects.order_by('-first_day')[:25]
         context = {'conference': conference, 'latest_conferences': latest_conferences}
 
-    return render(request, 'conference/conference_list.html', context)
+        return render(request, 'conference/conference_list.html', context)
 
 def conferenceDetails(request, id):
     conference = get_object_or_404(Conference, id=id)
@@ -66,8 +87,8 @@ def conferenceDetails(request, id):
 
 def viewConferences(request):
     latest_conferences = Conference.objects.order_by('-first_day')[:25]
+    
     context = {'latest_conferences': latest_conferences}
-
     return render(request, 'conference/view_conference_list.html', context)
 
 def uploadAbstract(request, id):
@@ -90,13 +111,42 @@ def abstractList(request, id):
         file_name = fs.save(uploaded_file.name, uploaded_file)
         url = fs.url(file_name)
         
-        abstract_paper = AbstractPaper(author_name=name, paper_title=title, abstract_file=uploaded_file)
+        abstract_paper = AbstractPaper(conference=conference, author_name=name, paper_title=title, abstract_file=uploaded_file)
         abstract_paper.save()
 
         context = {'conference': conference, 'abstract_paper': abstract_paper, 
-                   'uploaded_file': uploaded_file, 'file_name': file_name, 'url': url }
+                   'uploaded_file': uploaded_file, 'file_name': file_name, 'url': url}
 
     return render(request, 'conference/abstract_list.html', context)
 
+
+def abstractpaperList(request, id):
+    conference = Conference.objects.get(id=id)
+    abstractpapers = AbstractPaper.objects.filter(conference__id=id)
+    #abstractpapers = conference.abstractpapers_set.all()
+    print(abstractpapers)
+    context = {'conference': conference, 'abstractpapers': abstractpapers}
+
+    return render(request, 'conference/abstract_paper_list.html', context)
+
+def epicSeries(request):
+    context = {}
+    return render(request, 'epic/epic_series.html', context)
+
+def kalpaPublications(request):
+    context = {}
+    return render(request, 'kalpa_publications/kalpa_publications.html', context)
+
+def Preprint(request):
+    context = {}
+    return render(request, 'preprints/preprints.html', context)
+
+def Author(request):
+    context = {}
+    return render(request, 'author/author.html', context)
+
+def Editor(request):
+    context = {}
+    return render(request, 'editor/editor.html', context)
 
 

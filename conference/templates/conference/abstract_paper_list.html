@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted abstract papers</title>
+</head>
+<body>
+    <a href="{% url 'index' %}">Back to homepage</a> <br>
+    ID#{{conference.id}} <br>
+    Title#{{conference.title}} <br>
+
+    {% if abstractpapers %}
+    {% for abstractpaper in abstractpapers %}
+    <ul>
+        <li>{{abstractpaper.conference}}</li>
+        <li>{{abstractpaper.author_name}}</li>
+        <li>{{abstractpaper.paper_title}}</li>
+        <li>{{abstractpaper.abstract_file}}</li>
+    </ul>
+    {% endfor %}
+    {% endif %}
+</body>
+</html>
