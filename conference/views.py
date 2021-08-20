@@ -14,6 +14,20 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+#login
+def LoginView(request):
+    context = {
+        'name': 'Rafi',
+    }
+    return render(request, 'login/login.html', context)
+
+#Register
+def UserRegistration(request):
+    context = {
+        'name': 'Rafi',
+    }
+    return render(request, 'registration/user_registration.html', context)
+
 
 def Services(request):
     context = {}
@@ -40,8 +54,6 @@ def createConference(request):
     
 
     return render(request, 'conference/create_conference.html', context={'message': message})
-
-
 
 
 def conferenceList(request):
@@ -128,6 +140,11 @@ def abstractpaperList(request, id):
     context = {'conference': conference, 'abstractpapers': abstractpapers}
 
     return render(request, 'conference/abstract_paper_list.html', context)
+
+#reviewer
+def ReviewerMain(request):
+    context = {}
+    return render(request, 'reviewer/reviewer.html', context)
 
 def epicSeries(request):
     context = {}
