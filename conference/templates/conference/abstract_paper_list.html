@@ -7,10 +7,14 @@
     <title>Submitted abstract papers</title>
 </head>
 <body>
+    {% include 'navbar.html' %}
     <a href="{% url 'index' %}">Back to homepage</a> <br>
-    ID#{{conference.id}} <br>
-    Title#{{conference.title}} <br>
 
+    <div>
+        <p><strong>ID:</strong>{{conference.id}}</p> <br>
+        <p><strong>Title:</strong>{{conference.id}}</p> <br>
+    </div> <br>
+    
     {% if abstractpapers %}
     {% for abstractpaper in abstractpapers %}
     <ul>
