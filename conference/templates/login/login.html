@@ -11,6 +11,7 @@
 
     <fieldset>
         <form action="{% url 'index' %}">
+            {% csrf_token %}
             <label for="">Email: </label>
             <input type="text" name="email" id="email" required> <br>
             <label for="">Password: </label>

@@ -1,10 +1,12 @@
-import conference
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
-from .models import AbstractPaper, Conference
+from django.contrib.auth.forms import UserCreationForm
+
+from .models import *
+from .forms import *
 
 # Create your views here.
 
@@ -23,9 +25,14 @@ def LoginView(request):
 
 #Register
 def UserRegistration(request):
-    context = {
-        'name': 'Rafi',
-    }
+    form = UserRegistrationForm()
+
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    context = {'form': form}
     return render(request, 'registration/user_registration.html', context)
 
 
