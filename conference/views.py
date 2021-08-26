@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 from .models import *
@@ -35,6 +36,12 @@ def LoginView(request):
 
     context = {}
     return render(request, 'login/login.html', context)
+
+#logout
+def LogoutView(request):
+    logout(request)
+    return redirect('index')
+
 
 #Register
 def UserRegistration(request):
@@ -71,14 +78,13 @@ def ConferenceModule(request):
     return render(request, 'conference/conference.html', context)
 
 
-
+@login_required(login_url='login')
 def createConference(request):
     message = 'This is the conference creation page.'
     
-
     return render(request, 'conference/create_conference.html', context={'message': message})
 
-
+@login_required(login_url='login')
 def conferenceList(request):
     if request.method == 'POST':
         type = request.POST['type']
@@ -126,6 +132,7 @@ def viewConferences(request):
     context = {'latest_conferences': latest_conferences}
     return render(request, 'conference/view_conference_list.html', context)
 
+@login_required(login_url='login')
 def uploadAbstract(request, id):
 
     conference = get_object_or_404(Conference, id=id)
@@ -154,7 +161,7 @@ def abstractList(request, id):
 
     return render(request, 'conference/abstract_list.html', context)
 
-
+@login_required(login_url='login')
 def abstractpaperList(request, id):
     conference = Conference.objects.get(id=id)
     abstractpapers = AbstractPaper.objects.filter(conference__id=id)

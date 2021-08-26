@@ -9,6 +9,9 @@ urlpatterns = [
     #login
     path('login/', views.LoginView, name='login'),
 
+    #logout
+    path('logout/', views.LogoutView, name='logout'),
+
     #register
     path('user_registration/', views.UserRegistration, name='user_registration'),
 
