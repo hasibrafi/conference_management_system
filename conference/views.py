@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
@@ -31,6 +31,7 @@ def UserRegistration(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('login')
 
     context = {'form': form}
     return render(request, 'registration/user_registration.html', context)
