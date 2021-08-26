@@ -21,21 +21,24 @@ def index(request):
 
 #login
 def LoginView(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-        if user is not None:
-            login(request, user)
-            messages.success(request, f'Welcome {username}, you are at index page!')
-            return redirect('index')
-        else:
-            messages.info(request, 'Username or password is incorrect!')
+            if user is not None:
+                login(request, user)
+                messages.success(request, f'Welcome {username}, you are at index page!')
+                return redirect('index')
+            else:
+                messages.info(request, 'Username or password is incorrect!')
 
-    context = {}
-    return render(request, 'login/login.html', context)
+        context = {}
+        return render(request, 'login/login.html', context)
 
 #logout
 def LogoutView(request):
@@ -45,18 +48,21 @@ def LogoutView(request):
 
 #Register
 def UserRegistration(request):
-    form = UserRegistrationForm()
+    if request.user.is_authenticated:
+        return redirect('index')
+    else:
+        form = UserRegistrationForm()
 
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, f'{user}, your account has been created!')
-            return redirect('login')
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, f'{user}, your account has been created!')
+                return redirect('login')
 
-    context = {'form': form}
-    return render(request, 'registration/user_registration.html', context)
+        context = {'form': form}
+        return render(request, 'registration/user_registration.html', context)
 
 
 def Services(request):
