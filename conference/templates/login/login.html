@@ -10,14 +10,17 @@
     {% include 'navbar.html' %}
 
     <fieldset>
-        <form action="{% url 'index' %}">
+        <form action="" method="POST">
             {% csrf_token %}
-            <label for="">Email: </label>
-            <input type="text" name="email" id="email" required> <br>
+            <label for="">Username: </label>
+            <input type="text" name="username" id="username" required> <br>
             <label for="">Password: </label>
             <input type="password" name="password" id="password" required> <br>
             <input type="submit" value="Submit">
         </form>
+            {% for message in messages %}
+                {{message}}
+            {% endfor %}
     </fieldset>
     <a href="{% url 'user_registration' %}"><p>Don't have an account? Register here</p></a>
 </body>

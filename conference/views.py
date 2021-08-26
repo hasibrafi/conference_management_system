@@ -4,6 +4,8 @@ from django.shortcuts import redirect, render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
 from .models import *
 from .forms import *
@@ -18,9 +20,20 @@ def index(request):
 
 #login
 def LoginView(request):
-    context = {
-        'name': 'Rafi',
-    }
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Welcome {username}, you are at index page!')
+            return redirect('index')
+        else:
+            messages.info(request, 'Username or password is incorrect!')
+
+    context = {}
     return render(request, 'login/login.html', context)
 
 #Register
@@ -31,6 +44,8 @@ def UserRegistration(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, f'{user}, your account has been created!')
             return redirect('login')
 
     context = {'form': form}
