@@ -6,14 +6,17 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
 
+    #register
+    path('user_registration/', views.UserRegistration, name='user_registration'),
+
     #login
     path('login/', views.LoginView, name='login'),
 
     #logout
     path('logout/', views.LogoutView, name='logout'),
 
-    #register
-    path('user_registration/', views.UserRegistration, name='user_registration'),
+    #profile
+    path('profile/', views.ProfileView, name='profile'),
 
     #name_this_section
     path('service/', views.Services, name='service'),

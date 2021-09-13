@@ -10,35 +10,32 @@ from django.contrib import messages
 
 from .models import *
 from .forms import *
+from .decorators import *
 
 # Create your views here.
 
 def index(request):
-    context = {
-        'name': 'Rafi',
-    }
+    context = {}
     return render(request, 'index.html', context)
 
 #login
+@unauthenticated_user
 def LoginView(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-    else:
-        if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-            user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                login(request, user)
-                messages.success(request, f'Welcome {username}, you are at index page!')
-                return redirect('index')
-            else:
-                messages.info(request, 'Username or password is incorrect!')
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Welcome {username}, you are at index page!')
+            return redirect('index')
+        else:
+            messages.info(request, 'Username or password is incorrect!')
 
-        context = {}
-        return render(request, 'login/login.html', context)
+    context = {}
+    return render(request, 'login/login.html', context)
 
 #logout
 def LogoutView(request):
@@ -47,22 +44,25 @@ def LogoutView(request):
 
 
 #Register
+@unauthenticated_user
 def UserRegistration(request):
-    if request.user.is_authenticated:
-        return redirect('index')
-    else:
-        form = UserRegistrationForm()
+    form = UserRegistrationForm()
 
-        if request.method == 'POST':
-            form = UserRegistrationForm(request.POST)
-            if form.is_valid():
-                form.save()
-                user = form.cleaned_data.get('username')
-                messages.success(request, f'{user}, your account has been created!')
-                return redirect('login')
+    if request.method == 'POST':
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, f'{user}, your account has been created!')
+            return redirect('login')
 
-        context = {'form': form}
-        return render(request, 'registration/user_registration.html', context)
+    context = {'form': form}
+    return render(request, 'registration/user_registration.html', context)
+
+#profile
+def ProfileView(request):
+    context = {}
+    return render(request, 'profile/profile.html', context)
 
 
 def Services(request):
@@ -90,6 +90,7 @@ def createConference(request):
     
     return render(request, 'conference/create_conference.html', context={'message': message})
 
+#optimize this view function
 @login_required(login_url='login')
 def conferenceList(request):
     if request.method == 'POST':
@@ -139,6 +140,7 @@ def viewConferences(request):
     return render(request, 'conference/view_conference_list.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def uploadAbstract(request, id):
 
     conference = get_object_or_404(Conference, id=id)
