@@ -1,5 +1,4 @@
 from django.db.models.deletion import CASCADE
-import conference
 from django.contrib import admin
 from django.db import models 
 

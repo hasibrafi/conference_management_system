@@ -7,20 +7,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abstract list</title>
 </head>
-    {% include 'navbar.html' %}
+    
 <body>
+    {% extends 'navbar.html' %}
+    {% block content %}
     <a href="{% url 'index' %}">Back to homepage</a>
-    <div>
-        {{conference.id}} <br>
-        {{conference.title}} <br>
+    <div class="m-4">
+        <u><h5>Conference info:</h5></u>
+        Confernece id: {{conference.id}} <br>
+        Conference title: {{conference.title}} <br>
     </div>
     
-    <div>
-        <strong>Submission details:</strong>
-        <p>Author name: {{abstract_paper.author_name}}</p>
-        <p>Title: {{abstract_paper.paper_title}}</p>
-        <p>File path: <a href="{{url}}"> {{url}} </a></p>
-        <p>Abstract file: {{abstract_paper.abstract_file}} {{abstract_paper.uploaded_file}}</p>
+    <div class="m-4">
+        <u><h5>Participant info:</h5></u>
+        Author name: {{abstract_paper.author_name}} <br>
+        Title: {{abstract_paper.paper_title}} <br>
+        File path: <a href="{{url}}"> {{url}} </a> <br>
+        Abstract file: {{abstract_paper.abstract_file}} {{abstract_paper.uploaded_file}} <br>
     </div>
+    {% endblock %}
 </body>
 </html>

@@ -7,18 +7,17 @@
     <title>Participate</title>
 </head>
 <body>
-    Participation form here ...
-    <div>
-        <ul>
-            <b>
-                <li>Type: {{conference.type}}</li>
-                <li>ID#{{conference.id}}</li>
-                <li>Title: {{conference.title}}</li>
-                <li>Location: {{conference.city}}, {{conference.country}}</li>
-            </b>
-        </ul>
+    {% extends 'navbar.html' %}
+    {% block content %}
+    <div class="mb-4">
+        <u><h4>Event:</h4></u>
+        <li>Type: {{conference.type}}</li>
+        <li>Title: {{conference.title}}</li>
+        <li>Location: {{conference.city}}, {{conference.country}}</li>
+        
     </div>
-    <div>
+    <div class="mt-4">
+        <u><h4>Participant:</h4></u>
         <fieldset>
             <form action="{% url 'abstract_list' conference.id %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token  %}
@@ -34,5 +33,6 @@
             </form>
         </fieldset>
     </div>
+    {% endblock %}
 </body>
 </html>
