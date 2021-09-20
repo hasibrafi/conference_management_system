@@ -7,7 +7,8 @@
     <title>Registration</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% extends 'navbar.html' %}
+    {% block content %}
     <fieldset>
         <form action="" name="" method="POST">
             {% csrf_token %}
@@ -16,5 +17,8 @@
         </form>
     </fieldset>
     <a href="{% url 'login' %}"><p>Already have an account? Login</p></a>
+    {% endblock %}
+
+    
 </body>
 </html>

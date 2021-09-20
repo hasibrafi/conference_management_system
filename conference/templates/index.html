@@ -7,10 +7,12 @@
     <title>Index</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
-    
+    {% extends 'navbar.html' %}
+    {% block content %}
     <div>
-        <p>Welcome, {{request.user}}. You are at Index page!</p>
+        <p>Welcome, <b>{{request.user}}</b><br>
+        You are at Index page..</p>
     </div>
+    {% endblock %}
 </body>
 </html>

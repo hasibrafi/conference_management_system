@@ -7,17 +7,6 @@
     <title>Conferences</title>
 </head>
 <body>
-    <fieldset>
-        <h3>Conferences:</h3>
-        {% for conference in latest_conferences %}
-
-        <ul>
-            <li>
-                <a href="{% url 'conference_details' conference.id %}"><p>Title: {{conference.title}}</p></a>
-            </li>
-        </ul> 
-
-        {% endfor %}
-    </fieldset>
+    
 </body>
 </html>

@@ -7,7 +7,9 @@
     <title>Services</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <h2>Services</h2>
+    {% extends 'navbar.html' %}
+    {% block content %}
+        <h2>Services</h2>
+    {% endblock %}
 </body>
 </html>

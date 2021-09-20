@@ -7,23 +7,30 @@
     <title>Submitted abstract papers</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% extends 'navbar.html' %}
+    {% block content %}
     <a href="{% url 'index' %}">Back to homepage</a> <br>
 
     <div>
-        <p><strong>ID:</strong>{{conference.id}}</p> <br>
-        <p><strong>Title:</strong>{{conference.id}}</p> <br>
-    </div> <br>
+        <strong>Confernece ID: &nbsp;</strong>{{conference.id}} <br>
+        <strong>Confernece Title: &nbsp;</strong>{{conference.title}} <br>
+        <hr>
+    </div>
     
-    {% if abstractpapers %}
-    {% for abstractpaper in abstractpapers %}
-    <ul>
-        <li>{{abstractpaper.conference}}</li>
-        <li>{{abstractpaper.author_name}}</li>
-        <li>{{abstractpaper.paper_title}}</li>
-        <li>{{abstractpaper.abstract_file}}</li>
-    </ul>
-    {% endfor %}
-    {% endif %}
+    <div>
+        <p>Abstracts:</p>
+        {% if abstractpapers %}
+        {% for abstractpaper in abstractpapers %}
+        <ul>
+            <li>{{abstractpaper.conference}}</li>
+            <li>{{abstractpaper.author_name}}</li>
+            <li>{{abstractpaper.paper_title}}</li>
+            <li>{{abstractpaper.abstract_file}}</li>
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+    
+    {% endblock %}
 </body>
 </html>

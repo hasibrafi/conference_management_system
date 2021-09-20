@@ -7,13 +7,12 @@
     <title>Conference</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <h2>Conference</h2>
-    
+    {% extends 'navbar.html' %}
+    {% block content %}
     <div>
         <a href="{% url 'create_conference' %}"> Create conference</a> |
         <a href="{% url 'view_conferences' %}"> See list of conferences </a>
     </div>
-    
+    {% endblock %}
 </body>
 </html>

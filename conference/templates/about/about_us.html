@@ -7,7 +7,9 @@
     <title>About Us</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
+    {% extends 'navbar.html' %}
+    {% block content %}
     <h2>About Us</h2>
+    {% endblock %}
 </body>
 </html>

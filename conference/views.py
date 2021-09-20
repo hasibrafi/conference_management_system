@@ -93,7 +93,12 @@ def createConference(request):
 #optimize this view function
 @login_required(login_url='login')
 def conferenceList(request):
-    if request.method == 'POST':
+    # form = ConferenceForm()
+    # if request.method == 'POST':
+    #     form = ConferenceForm(request.POST)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('conference_list')
         type = request.POST['type']
         title = request.POST['title']
         acronym = request.POST['acronym']
@@ -109,9 +114,7 @@ def conferenceList(request):
         areanotes = request.POST['areanotes']
         organizer = request.POST['organizer']
         org_webpage = request.POST['org_webpage']
-        phoneno = request.POST['phoneno']
-        role = request.POST['role']
-        otherinfo = request.POST['otherinfo']
+    
 
         conference = Conference(type= type, title= title, acronym= acronym, web_page= webpage,
                      venue = venue, city = city, country = country, est_submissions = est_submissions, 

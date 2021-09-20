@@ -7,37 +7,30 @@
     <title>Conference details</title>
 </head>
 <body>
-    <!-- <div>
-        <h3>EasyChair</h3>
-        <a href="{% url 'index' %}">Home</a>|
-        <a href="{% url 'epic_series' %}">EPiC Series</a> |
-        <a href="{% url 'kalpa_publications' %}">Kalpa Publication</a> |
-        <a href="{% url 'preprints' %}">Preprints</a> |
-        <a href="{% url 'author' %}">Author</a> |
-        <a href="{% url 'editor' %}">Editor</a>
-    </div> -->
+    {% extends 'navbar.html' %}
+    {% block content %}
     <fieldset>
         <p>
-            <u>Conference ID#{{conference.id}}</u>
-            <a href="{% url 'abstract_paper_list' conference.id %}"><p>See submitted abstracts here</p></a>
+            <a href="{% url 'abstract_paper_list' conference.id %}">See submitted abstracts here</a> |
+            <a href="{% url 'upload_abstract' conference.id %}">Participate here</a>
         </p>
-        <p><b>Title: </b>{{conference.title}}</p>
-        <p><b>Acronym: </b>{{conference.acronym}}</p>
-        
-        <p><b>Website: </b>{{conference.web_page}}</p>
-        <p><b>City: </b>{{conference.city}}</p>
-        <p><b>Venue: </b>{{conference.venue}}</p>
-        <p><b>Country: </b>{{conference.country}}</p>  
-        <p><b>Submissions limit: </b>{{conference.est_submissions}}</p>
-        <p><b>First day: </b>{{conference.first_day}}</p>
-        <p><b>Last day: </b>{{conference.last_day}}</p>
-        <p><b>Primary area: </b>{{conference.primary_area}}</p>
-        <p><b>Secondary area: </b>{{conference.secondary_area}}</p>
-        <p><b>Area notes: </b>{{conference.area_notes}}</p>
-        <p><b>Organizer: </b>{{conference.organizer}}</p>
-        <p><b>Organizer's website: </b>{{conference.organizer_webpage}}</p>
-        <a href="{% url 'upload_abstract' conference.id %}"><p>Participate here</p></a>
+    
+        <p><b><u>Conference ID#{{conference.id}}</u></b></p>
+        <p>Title: {{conference.title}}</p>
+        <p>Acronym: {{conference.acronym}}</p>
+        <p>Website: {{conference.web_page}}</p>
+        <p>City: {{conference.city}}</p>
+        <p>Venue: {{conference.venue}}</p>
+        <p>Country: {{conference.country}}</p>  
+        <p>Submissions limit: {{conference.est_submissions}}</p>
+        <p>First day: {{conference.first_day}}</p>
+        <p>Last day: {{conference.last_day}}</p>
+        <p>Primary area: {{conference.primary_area}}</p>
+        <p>Secondary area: {{conference.secondary_area}}</p>
+        <p>Area notes: {{conference.area_notes}}</p>
+        <p>Organizer: {{conference.organizer}}</p>
+        <p>Organizer's website: {{conference.organizer_webpage}}</p>
     </fieldset>
-
+    {% endblock %}
 </body>
 </html>

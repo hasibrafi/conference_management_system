@@ -10,9 +10,8 @@
     <title>Navbar</title>
 </head>
 <body>
-    {% block content %}
-
-    <div>
+    <!-- Navbar start -->
+    <div class="container">
         <h3>EasyChair</h3>
         <a href="{% url 'service' %}">Services</a> |
         <a href="{% url 'about_us' %}">About Us</a> |
@@ -25,8 +24,16 @@
         <a href="{% url 'login' %}">Login</a> |
         <a href="{% url 'logout' %}">Logout</a> 
     </div>
-
-    {% endblock %}
+    <hr>
+    <!-- Navbar end -->
+    
+    <!-- Block content start -->
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- Block content end -->
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>
