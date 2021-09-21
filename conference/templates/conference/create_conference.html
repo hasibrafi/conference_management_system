@@ -16,80 +16,53 @@
                 {% csrf_token %}
                 <div>       
                     <label for="type">Type *</label>      
-                        <select name="type" id="type" >
-                            <option >Conference</option>
-                            <option >Journal</option>
-                            <option >Journal special issue</option>
-                            <option >Book</option>
-                            <option >Teaching</option>
-                        </select><br>
+                    {{form.type}} <br>
+
                     <label for="">Conference name: *</label>
-                    <input type="text" name="title"  required><br>
+                    {{form.title}} <br>
+
                     <label for="">Acronym: *</label>
-                    <input type="text" name="acronym"  required><br>
+                    {{form.acronym}} <br>
                     <hr>
+
                     <label for="">Web page: *</label>
-                    <input type="text" name="webpage" required><br>
+                    {{form.web_page}} <br>
+
                     <label for="">Venue: </label>
-                    <input type="text" name="venue"><br>
+                    {{form.venue}} <br>
+
                     <label for="">City: *</label>
-                    <input type="text" name="city" required><br>
+                    {{form.city}} <br>
+
                     <label for="country">Country/region: *</label>
-                        <select name="country" id="country" required>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="India">India</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="USA">USA</option>
-                        </select><br>
+                    {{form.country}} <br>
+
                     <label for="">Estimated number of submissions: *</label>
-                    <input type="text" name="noofsubmissions" required><br>
+                    {{form.est_submissions}} <br>
                     <hr>
+
                     <label for="">First day: </label>
-                    <input type="datetime-local" name="firstday" required><br>
+                    {{form.first_day}} <br>
+
                     <label for="">Last day: </label>
-                    <input type="datetime-local" name="lastday" required><br>
+                    {{form.last_day}} <br>
                     <hr>
+
                     <label for="primary_area">Primary area: </label>
-                    <select name="primary_area" id="primary_area" required>
-                        <option value="Accounting and Finance">Accounting and finance</option>
-                        <option value="Art and literature">Art and literature</option>
-                        <option value="Biological Sciences">Biological Sciences</option>
-                        <option value="Business and Management">Business and Management</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Civil Engineering">Civil Engineering</option>
-                        <option value="Electrical Engineering">Electrical Engineering</option>
-                        <option value="Information and Technology">Information and Technology</option>
-                        <option value="Industrial Computing and Networking">Industrial Computing and Networking</option>
-                        <option value="Computer Engineering">Computer Engineering</option>
-                    </select><br>
+                    {{form.primary_area}} <br>
+
                     <label for="secondary_area">Scenondary area: </label>
-                    <select name="secondary_area" id="primary_area">
-                        <option value="Accounting and Finance">Accounting and finance</option>
-                        <option value="Art and literature">Art and literature</option>
-                        <option value="Biological Sciences">Biological Sciences</option>
-                        <option value="Business and Management">Business and Management</option>
-                        <option value="Chemistry">Chemistry</option>
-                        <option value="Civil Engineering">Civil Engineering</option>
-                        <option value="Electrical Engineering">Electrical Engineering</option>
-                        <option value="Information and Technology">Information and Technology</option>
-                        <option value="Industrial Computing and Networking">Industrial Computing and Networking</option>
-                        <option value="Computer Engineering">Computer Engineering</option>
-                    </select><br>
+                    {{form.secondary_area}} <br>
+
                     <label for="">Area notes: </label>
-                    <input type="text" name="areanotes" required><br>
+                    {{form.area_notes}} <br>
                     <hr>
+
                     <label for="">Organizer: *</label>
-                    <input type="text" name="organizer" required><br>
+                    {{form.organizer}} <br>
+
                     <label for="">Organizer Web page: </label>
-                    <input type="text" name="org_webpage" required><br>
-                    <label for="">Contact phone number: *</label>
-                    <input type="text" name="phoneno" required><br>
-                    <hr>
-                    <label for="">Your role: *</label>
-                    <input type="text" name="role"><br>
-                    <label for="">Any other information: </label>
-                    <input type="text" name="otherinfo"><br>
-                    <hr>    
+                    {{form.organizer_webpage}} <br>
                 </div>
                 <hr>
                 <input type="submit" value="Submit">

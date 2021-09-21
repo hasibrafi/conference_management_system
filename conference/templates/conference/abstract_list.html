@@ -12,12 +12,15 @@
     {% extends 'navbar.html' %}
     {% block content %}
     <a href="{% url 'index' %}">Back to homepage</a>
+
+    <!-- Conference basic info -->
     <div class="m-4">
         <u><h5>Conference info:</h5></u>
         Confernece id: {{conference.id}} <br>
         Conference title: {{conference.title}} <br>
     </div>
     
+    <!-- Author uploaded abstract info -->
     <div class="m-4">
         <u><h5>Participant info:</h5></u>
         Author name: {{abstract_paper.author_name}} <br>

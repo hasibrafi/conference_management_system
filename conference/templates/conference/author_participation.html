@@ -9,13 +9,15 @@
 <body>
     {% extends 'navbar.html' %}
     {% block content %}
+    <!-- Conference basic info -->
     <div class="mb-4">
         <u><h4>Event:</h4></u>
         <li>Type: {{conference.type}}</li>
         <li>Title: {{conference.title}}</li>
         <li>Location: {{conference.city}}, {{conference.country}}</li>
-        
     </div>
+
+    <!-- Abstract upload form -->
     <div class="mt-4">
         <u><h4>Participant:</h4></u>
         <fieldset>

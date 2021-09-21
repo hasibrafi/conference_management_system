@@ -1,3 +1,4 @@
+import conference
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import redirect, render
@@ -86,49 +87,24 @@ def ConferenceModule(request):
 
 @login_required(login_url='login')
 def createConference(request):
-    message = 'This is the conference creation page.'
-    
-    return render(request, 'conference/create_conference.html', context={'message': message})
+    form = ConferenceForm()
+    context = {'form': form}
+    return render(request, 'conference/create_conference.html', context)
 
 #optimize this view function
 @login_required(login_url='login')
 def conferenceList(request):
-    # form = ConferenceForm()
-    # if request.method == 'POST':
-    #     form = ConferenceForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('conference_list')
-        type = request.POST['type']
-        title = request.POST['title']
-        acronym = request.POST['acronym']
-        webpage = request.POST['webpage']
-        venue = request.POST['venue']
-        city = request.POST['city']
-        country = request.POST['country']
-        est_submissions = request.POST['noofsubmissions']
-        firstday = request.POST['firstday']
-        lastday = request.POST['lastday']
-        primaryarea = request.POST['primary_area']
-        secondaryarea = request.POST['secondary_area']
-        areanotes = request.POST['areanotes']
-        organizer = request.POST['organizer']
-        org_webpage = request.POST['org_webpage']
-    
+    form = ConferenceForm()
+    if request.method == 'POST':
+        form = ConferenceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('view_conferences')
 
-        conference = Conference(type= type, title= title, acronym= acronym, web_page= webpage,
-                     venue = venue, city = city, country = country, est_submissions = est_submissions, 
-                     first_day = firstday, last_day = lastday, primary_area = primaryarea,
-                     secondary_area = secondaryarea, area_notes = areanotes, organizer = organizer,
-                     organizer_webpage = org_webpage
-                     )
+    latest_conferences = Conference.objects.order_by('-first_day')[:25]
+    context = {'conference': conference, 'latest_conferences': latest_conferences}
 
-        conference.save()
-
-        latest_conferences = Conference.objects.order_by('-first_day')[:25]
-        context = {'conference': conference, 'latest_conferences': latest_conferences}
-
-        return render(request, 'conference/conference_list.html', context)
+    return render(request, 'conference/conference_list.html', context)
 
 def conferenceDetails(request, id):
     conference = get_object_or_404(Conference, id=id)
