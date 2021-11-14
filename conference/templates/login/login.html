@@ -19,9 +19,9 @@
             <input type="password" name="password" id="password" required> <br>
             <input type="submit" value="Submit">
         </form>
-            {% for message in messages %}
+            <!-- {% for message in messages %}
                 {{message}}
-            {% endfor %}
+            {% endfor %} -->
     </fieldset>
     <a href="{% url 'user_registration' %}"><p>Don't have an account? Register here</p></a>
     {% endblock %}

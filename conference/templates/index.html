@@ -10,8 +10,9 @@
     {% extends 'navbar.html' %}
     {% block content %}
     <div>
+        {% if not user.is_anonymous %}
         <p>Welcome, <b>{{request.user}}</b><br>
-        You are at Index page..</p>
+        {% endif %}
     </div>
     {% endblock %}
 </body>
