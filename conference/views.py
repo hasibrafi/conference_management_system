@@ -86,6 +86,7 @@ def ConferenceModule(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','host'])
 def createConference(request):
     form = ConferenceForm()
     context = {'form': form}
@@ -119,7 +120,7 @@ def viewConferences(request):
     return render(request, 'conference/view_conference_list.html', context)
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin'])
+@allowed_users(allowed_roles=['admin','author'])
 def uploadAbstract(request, id):
 
     conference = get_object_or_404(Conference, id=id)
@@ -149,6 +150,7 @@ def abstractList(request, id):
     return render(request, 'conference/abstract_list.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','host','reviewer'])
 def abstractpaperList(request, id):
     conference = Conference.objects.get(id=id)
     abstractpapers = AbstractPaper.objects.filter(conference__id=id)
