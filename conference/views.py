@@ -62,7 +62,10 @@ def UserRegistration(request):
 
 #profile
 def ProfileView(request):
-    context = {}
+    if request.user.is_authenticated:
+        user = request.user
+        group = request.user.groups.all()[0]
+    context = {'user':user, 'group':group}
     return render(request, 'profile/profile.html', context)
 
 
