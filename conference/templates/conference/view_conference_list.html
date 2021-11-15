@@ -15,6 +15,7 @@
         <ul>
             <li>
                 <a href="{% url 'conference_details' conference.id %}"><p>Title: {{conference.title}}</p></a>
+                <p>{{abstract_count}}</p>
             </li>
         </ul> 
         {% endfor %}

@@ -65,8 +65,9 @@ def ProfileView(request):
     if request.user.is_authenticated:
         user = request.user
         group = request.user.groups.all()[0]
-    context = {'user':user, 'group':group}
-    return render(request, 'profile/profile.html', context)
+        context = {'user':user, 'group':group}
+        return render(request, 'profile/profile.html', context)
+    return render(request, 'profile/profile.html')
 
 
 def Services(request):
@@ -104,6 +105,9 @@ def conferenceList(request):
         if form.is_valid():
             form.save()
             return redirect('view_conferences')
+    
+    # abstracts = AbstractPaper.objects.all()
+    # abstract_count = abstracts.count()
 
     latest_conferences = Conference.objects.order_by('-first_day')[:25]
     context = {'conference': conference, 'latest_conferences': latest_conferences}
@@ -118,6 +122,9 @@ def conferenceDetails(request, id):
 
 def viewConferences(request):
     latest_conferences = Conference.objects.order_by('-first_day')[:25]
+
+    # abstracts = Conference.AbstractPaper.objects.all()
+    # abstract_count = abstracts.count()
     
     context = {'latest_conferences': latest_conferences}
     return render(request, 'conference/view_conference_list.html', context)
